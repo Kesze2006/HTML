@@ -143,15 +143,5 @@ function nyomasPepa()
 }
 function nyomasAdy()
 {
-    let a=document.getElementById("bemutat")
-    if(kattint==0)
-    {
-        a.innerHTML="";
-        kattint++;
-    }
-    else if(kattint==1)
-    {
-        a.innerHTML="";
-        kattint=0;
-    }
+    window.open("https://ady-nagyatad.hu/")
 }

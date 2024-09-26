@@ -4,15 +4,17 @@ h1
     color: bisque;
     font-style: italic;
     font-size: 100px !important;
+    display: inline-block;
+    margin-left: 75px;
 
 }
 #txt
 {
     text-align: right;
-    margin-left: 1200px;
+    margin-left: 725px;
     font-size: 120px;
     color: bisque;
-
+    display: inline-block;
 }
 img
 {
@@ -36,4 +38,21 @@ body
     background-image: url(Coding-Wallpaper-Free-Download.png);
     background-repeat: no-repeat;
     background-size: cover;
+}
+#gomb
+{
+    border-radius: 4px;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+#bemutat
+{
+    margin-left: auto;
+    margin-right: auto;
+    color: bisque;
+    text-align: center;
+    font-size: x-large;
+    position: relative;
+    background-color: black;
+    max-width: 70%;
 }
