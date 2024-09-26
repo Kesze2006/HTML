@@ -1,12 +1,18 @@
 h1
 {
     text-align: center;
-    font-size: 50px;
+    color: bisque;
+    font-style: italic;
+    font-size: 100px !important;
+
 }
 #txt
 {
-    text-align: center;
-    font-size: 70px;
+    text-align: right;
+    margin-left: 1200px;
+    font-size: 120px;
+    color: bisque;
+
 }
 img
 {
@@ -24,4 +30,10 @@ table
 }
 #kep{
     height: 600px;
+}
+body
+{
+    background-image: url(Coding-Wallpaper-Free-Download.png);
+    background-repeat: no-repeat;
+    background-size: cover;
 }
