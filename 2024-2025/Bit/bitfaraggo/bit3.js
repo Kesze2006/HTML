@@ -90,7 +90,7 @@ function nyomasMate()
     let a=document.getElementById("bemutat")
     if(kattint==0)
     {
-        a.innerHTML="Konyhási Máté vagyok, nem szeretem a humán tantárgyakat. Szeretek a Snowrener nevű játékkal játszani";
+        a.innerHTML="Konyhási Máté vagyok, nem szeretem a humán tantárgyakat, szeretek a Snowrunner nevű játékkal játszani";
         kattint++;
     }
     else if(kattint==1)
@@ -104,7 +104,7 @@ function nyomasMatyi()
     let a=document.getElementById("bemutat")
     if(kattint==0)
     {
-        a.innerHTML="Holczer Mátyás vagyok, szeretek programozni,és Szeretek a Snowrener nevű játékkal játszani";
+        a.innerHTML="Holczer Mátyás vagyok, szeretek programozni, és szeretek a Snowrunner nevű játékkal játszani";
         kattint++;
     }
     else if(kattint==1)
@@ -118,7 +118,7 @@ function nyomasAkos()
     let a=document.getElementById("bemutat")
     if(kattint==0)
     {
-        a.innerHTML="Keszericze Ákos vagyok, szeretek kosarazni, és a barátaimmal lenni és a Snowrener nevű játékkal játszani";
+        a.innerHTML="Keszericze Ákos vagyok, szeretek kosarazni, és a barátaimmal lenni és a Snowrunner nevű játékkal játszani";
         kattint++;
     }
     else if(kattint==1)
