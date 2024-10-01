@@ -48,23 +48,23 @@ let atlag = 0;
 let atlagok = [];
 let id = 0;
 
-function hozzaad(){
+function hozzaad() {
     ev = document.getElementById("datuminput").value.split("-")[0];
     honap = document.getElementById("datuminput").value.split("-")[1];
     nap = document.getElementById("datuminput").value.split("-")[2];
     liter = document.getElementById("literinput").value;
     forint = document.getElementById("forintinput").value;
     km = document.getElementById("kminput").value;
-    if (adatok.length > 0){
-        kmkulonbseg = km - adatok[adatok.length-1][5];
-        elfogyasztott = adatok[adatok.length-1][3];
+    if (adatok.length > 0) {
+        kmkulonbseg = km - adatok[adatok.length - 1][5];
+        elfogyasztott = adatok[adatok.length - 1][3];
         atlag = elfogyasztott / kmkulonbseg;
     }
-    if (adatok.length > 0){
+    if (adatok.length > 0) {
         adatok.push([ev, honap, nap, liter, forint, km, kmkulonbseg, elfogyasztott, atlag]);
         atlagok.push(atlag);
     }
-    else{
+    else {
         adatok.push([ev, honap, nap, liter, forint, km]);
     }
 
@@ -77,7 +77,7 @@ function hozzaad(){
     let kmcella = document.createElement("td");
     let kmkulonbsegcella;
     let elfogyasztottcella;
-    if (adatok.length > 1){
+    if (adatok.length > 1) {
         kmkulonbsegcella = document.createElement("td");
         elfogyasztottcella = document.createElement("td");
     }
@@ -86,7 +86,7 @@ function hozzaad(){
     litercella.innerHTML = liter;
     forintcella.innerHTML = forint;
     kmcella.innerHTML = km;
-    if (adatok.length > 1){
+    if (adatok.length > 1) {
         kmkulonbsegcella.innerHTML = kmkulonbseg;
         elfogyasztottcella.innerHTML = elfogyasztott;
     }
@@ -95,40 +95,40 @@ function hozzaad(){
     ujsor.appendChild(litercella);
     ujsor.appendChild(forintcella);
     ujsor.appendChild(kmcella);
-    if (adatok.length > 1){
+    if (adatok.length > 1) {
         ujsor.appendChild(kmkulonbsegcella);
         ujsor.appendChild(elfogyasztottcella);
     }
 
     document.getElementById("tankolasok").appendChild(ujsor);
 
-    if (havibontas.length === 0){
+    if (havibontas.length === 0) {
         havibontas.push([ev, honap, Number(liter), Number(forint)])
     }
-    else{
+    else {
         let van = 0;
-        for (let j = 0; j < havibontas.length; j++){
-            if (havibontas[j][0] === ev && havibontas[j][1] === honap){
+        for (let j = 0; j < havibontas.length; j++) {
+            if (havibontas[j][0] === ev && havibontas[j][1] === honap) {
                 havibontas[j][2] += Number(liter);
                 havibontas[j][3] += Number(forint);
                 van = 1;
             }
         }
-        if (van === 0){
+        if (van === 0) {
             havibontas.push([ev, honap, Number(liter), Number(forint)])
         }
     }
 
     document.getElementById("havikiadas").innerHTML = "";
 
-    for (let i = 0; i < havibontas.length; i++){
+    for (let i = 0; i < havibontas.length; i++) {
         document.getElementById("havikiadas").innerHTML += havibontas[i][0] + ". " + havibontas[i][1] + ". " + havibontas[i][2] + "L " + havibontas[i][3] + "Ft<br>";
     }
 
-    for (let i = 0; i < 1; i++){
-        for (let j = 0; j < adatok.length; j++){
+    for (let i = 0; i < 1; i++) {
+        for (let j = 0; j < adatok.length; j++) {
             console.log(adatok[j][8]);
-            if (Math.max(atlagok) === adatok[j][8]){
+            if (Math.max(atlagok) === adatok[j][8]) {
                 document.getElementById(j).style.backgroundColor = "red";
                 console.log("bement");
             }
@@ -138,7 +138,7 @@ function hozzaad(){
     console.log(atlagok);
 }
 
-function szures(){
+function szures() {
     let elejeev = document.getElementById("eleje").value.split("-")[0];
     let elejehonap = document.getElementById("eleje").value.split("-")[1];
     let elejenap = document.getElementById("eleje").value.split("-")[2];
@@ -147,10 +147,10 @@ function szures(){
     let vegenap = document.getElementById("vege").value.split("-")[2];
     let kiirando = [];
 
-    for (let i = 0; i < adatok.length; i++){
-        if (adatok[i][0] >= elejeev && adatok[i][0] <= vegeev){
-            if (adatok[i][1] >= elejehonap && adatok[i][1] <= vegehonap){
-                if (adatok[i][2] >= elejenap && adatok[i][2] <= vegenap){
+    for (let i = 0; i < adatok.length; i++) {
+        if (adatok[i][0] >= elejeev && adatok[i][0] <= vegeev) {
+            if (adatok[i][1] >= elejehonap && adatok[i][1] <= vegehonap) {
+                if (adatok[i][2] >= elejenap && adatok[i][2] <= vegenap) {
                     kiirando.push(adatok[i]);
                 }
             }
@@ -158,7 +158,7 @@ function szures(){
     }
 
     document.getElementById("szures").innerHTML = "";
-    for (let i = 0; i < kiirando.length; i++){
+    for (let i = 0; i < kiirando.length; i++) {
         document.getElementById("szures").innerHTML += kiirando[i][0] + ". " + kiirando[i][1] + ". " + kiirando[i][2] + ". " + kiirando[i][3] + "L " + kiirando[i][4] + "Ft " + kiirando[i][5] + "Km<br>";
     }
 }
