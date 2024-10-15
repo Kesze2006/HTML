@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="hu">
+  <head>
+    <title>Számok</title>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <style type="text/css" media="screen,projection,print">
+      body {
+        font-family: Arial, Helvetica, sans-serif;
+        background-color: bisque;
+      }
+
+      section {
+        min-width: 400px;
+        padding: 20px;
+        margin: 10px auto 10px auto;
+      }
+
+      h1,
+      p {
+        text-align: center;
+        line-height: 5px;
+      }
+
+      h1 {
+        color: #1f2839;
+        font-size: 2.5em;
+        margin-top: 0px;
+      }
+
+      #palya {
+        background: orange;
+        font-size: 2em;
+        text-align: center;
+        margin: auto;
+        border-color: orange;
+        box-shadow: 10px 10px 5px #d0d0d0;
+      }
+
+      button {
+        background-color: cornflowerblue;
+        border: none;
+        color: white;
+        padding: 10px;
+        text-align: center;
+        text-decoration: none;
+        display: block;
+        font-size: 16px;
+        margin: 20px auto;
+        cursor: pointer;
+        border-radius: 4px;
+      }
+
+      #gombok button {
+        display: inline-block;
+        margin: 0px 0px;
+        margin-right: 50px;
+      }
+
+      #gombok {
+        width: max-content;
+        margin: 0px auto;
+      }
+      body {
+        font-family: Arial, Helvetica, sans-serif;
+        background-color: bisque;
+        text-align: center;
+      }
+
+      td {
+        border: 1px solid black;
+        width: 150px;
+        height: 150px;
+        text-align: center;
+        font-size: 50px;
+      }
+
+      div {
+        font-size: 30px;
+        padding: 5px;
+      }
+
+      h1 {
+        text-align: center;
+        font-size: 50px;
+      }
+
+      h2 {
+        font-size: 40px;
+      }
+
+      img {
+        object-fit: cover;
+        display: block;
+        width: 100%;
+        height: 100%;
+      }
+
+      table {
+        margin: 0 auto;
+      }
+
+      tr {
+        margin: 0;
+        border: 2px solid black;
+      }
+      input {
+        height: 70px;
+        width: 70px;
+        text-align: center;
+        font-size: 30px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <h1>Szőlő szüretelős játék</h1>
+    <div>
+      A játék lényege hogy olyan irányba haladjunk, hogy minél több szőlőt
+      tudjunk le szüretelni.
+    </div>
+    <h2>Speciális lépések:</h2>
+    <div>
+      Teleportálás: Ilyenkor bármely mezőre tudunk lépni és a játékot arról a
+      mezőről folytatjuk.
+    </div>
+    <div>
+      Látótávolság növelés: Ilyenkor nem csak egy hanem kettő mező távolságra is
+      tudunk lépni.
+    </div>
+    <div>
+      Kereszt: Ekkor a játékos az adott oszlopban és sorban bárhová képes lépni,
+      és onnan folytatja ahová lépett.
+    </div>
+    <h2>Lapok értéke:</h2>
+    <table>
+      <tr>
+        <td>Képek:</td>
+        <td><img src="szolo1.PNG" /></td>
+        <td><img src="szolo2.PNG" /></td>
+        <td><img src="szolo3.PNG" /></td>
+        <td><img src="szolo4.PNG" /></td>
+        <td><img src="szolo5.PNG" /></td>
+        <td><img src="szolo6.PNG" /></td>
+      </tr>
+      <tr>
+        <td>Értékük:</td>
+        <td>16</td>
+        <td>8</td>
+        <td>9</td>
+        <td>13</td>
+        <td>10</td>
+        <td>10</td>
+      </tr>
+    </table>
+    <h2>A pálya nagysága:</h2>
+    <input type="number" id="mezo" min="2" />
+    <button onclick="vizsgal()">Mehet a Játék!</button>
+    <!-- <section>
+      <h1>Szüretelés</h1>
+
+      <button onclick="location.href = 'index.html';">Szabályzat</button>
+
+      <p>Hátralévő lépésszám:</p>
+      <p id="hatralevo"></p>
+
+      <p>Pontoszám:</p>
+      <p id="score">0</p>
+
+      <p>Legjobb pontszám:</p>
+      <p id="highscore">0</p>
+
+      <table id="palya"></table>
+
+      <button onclick="ujra()" id="reset">Pálya visszatöltése</button>
+
+      <p>Képességek:</p>
+      <div id="gombok">
+        <button onclick="teleport()" id="tp">Teleportálás</button>
+        <button onclick="pluszegy()" id="plusz">Látótávolság növelés</button>
+        <button onclick="kereszt()" id="cross">Kereszt</button>
+      </div>
+    </section> -->
+    <script>
+          var nrow 
+          var ncell
+          var tt 
+          var newrow;
+          var lepes
+          let eredetilepes
+          let row
+          let column
+          let szolok = [
+            "szolo1",
+            "szolo2",
+            "szolo3",
+            "szolo4",
+            "szolo5",
+            "szolo6",
+          ];
+          let ertekek = [16, 8, 9, 13, 10, 10];
+      function vizsgal() {
+        let gizsgugya = document.getElementById("mezo").value;
+          console.log(gizsgugya)
+        if (
+           gizsgugya >= 2 &&
+          Number.isNaN(document.getElementById("mezo")) == false
+        ) {
+          
+          document.body.innerHTML = "";
+          let sekcio = document.createElement("section");
+          let szoveg = document.createElement("h1");
+          szoveg.innerHTML = "Szüretelés";
+          sekcio.appendChild(szoveg);
+          let lepesszoveg = document.createElement("p");
+          lepesszoveg.innerHTML = "Hátralévő lépésszám:";
+          sekcio.appendChild(lepesszoveg);
+          let lepesszam = document.createElement("p");
+          lepesszam.setAttribute("id", "hatralevo");
+          sekcio.appendChild(lepesszam);
+          let pontszoveg = document.createElement("p");
+          pontszoveg.innerHTML = "Pontok:";
+          sekcio.appendChild(pontszoveg);
+          let pontok = document.createElement("p");
+          pontok.setAttribute("id", "score");
+          pontok.innerHTML = 0;
+          sekcio.appendChild(pontok);
+          let legjobbpontszoveg = document.createElement("p");
+          legjobbpontszoveg.innerHTML = "Legjobb pontszám:";
+          sekcio.appendChild(legjobbpontszoveg);
+          let legjobbpontok = document.createElement("p");
+          legjobbpontok.setAttribute("id", "highscore");
+          legjobbpontok.innerHTML = 0;
+          sekcio.appendChild(legjobbpontok);
+          let tabla = document.createElement("table");
+          tabla.setAttribute("id", "palya");
+          sekcio.appendChild(tabla);
+          let ujrakezd = document.createElement("button");
+          ujrakezd.innerHTML = "Pálya visszatöltése";
+          ujrakezd.setAttribute("id", "reset");
+          ujrakezd.addEventListener("click", function () {
+            if (
+              document.getElementById("highscore").innerHTML <
+              document.getElementById("score").innerHTML
+            ) {
+              document.getElementById("highscore").innerHTML =
+                document.getElementById("score").innerHTML;
+            }
+
+            lepes = eredetilepes;
+            document.getElementById("hatralevo").innerHTML = lepes;
+            document.getElementById("score").innerHTML = 0;
+
+            for (var i = 0; i < nrow; i++) {
+              for (var j = 0; j < ncell; j++) {
+                tt[i][j].dataset.aktiv = 0;
+                tt[i][j].lastChild.style.filter = "brightness(100%)";
+                tt[i][j].innerHTML =
+                  '<img src="' +
+                  szolok[tt[i][j].dataset.ertek] +
+                  '.png" style="width: 100%; height: 100%; object-fit: cover; display: block; position: relative">';
+              }
+            }
+
+            document.getElementById("tp").style.display = "inline-block";
+            document.getElementById("plusz").style.display = "inline-block";
+            document.getElementById("cross").style.display = "inline-block";
+          });
+          sekcio.appendChild(ujrakezd);
+          let kepesseg = document.createElement("p");
+          kepesseg.innerHTML = "Képességek:";
+          sekcio.appendChild(kepesseg);
+          let keret = document.createElement("div");
+          keret.setAttribute("id", "gombok");
+          let gomb1 = document.createElement("button");
+          gomb1.innerHTML = "Teleportálás";
+          gomb1.setAttribute("id", "tp");
+          gomb1.addEventListener("click", function () {
+            for (var i = 0; i < nrow; i++) {
+              for (var j = 0; j < ncell; j++) {
+                tt[i][j].dataset.aktiv = 1;
+                tt[i][j].lastChild.style.filter = "brightness(75%)";
+              }
+            }
+
+            tt[row][column].dataset.aktiv = 2;
+            tt[row][column].lastChild.style.filter = "brightness(100%)";
+            document.getElementById("tp").style.display = "none";
+          });
+          keret.appendChild(gomb1);
+          let gomb2 = document.createElement("button");
+          gomb2.innerHTML = "Látótávolság növelés";
+          gomb2.setAttribute("id", "plusz");
+          gomb2.addEventListener("click", function () {
+            if (row < nrow - 2) {
+              tt[row + 2][column].dataset.aktiv = 1;
+              tt[row + 2][column].lastChild.style.filter = "brightness(75%)";
+            }
+            if (column > 1) {
+              tt[row][column - 2].dataset.aktiv = 1;
+              tt[row][column - 2].lastChild.style.filter = "brightness(75%)";
+            }
+            if (column < ncell - 2) {
+              tt[row][column + 2].dataset.aktiv = 1;
+              tt[row][column + 2].lastChild.style.filter = "brightness(75%)";
+            }
+            if (row > 1) {
+              tt[row - 2][column].dataset.aktiv = 1;
+              tt[row - 2][column].lastChild.style.filter = "brightness(75%)";
+            }
+
+            document.getElementById("plusz").style.display = "none";
+          });
+          keret.appendChild(gomb2);
+          let gomb3 = document.createElement("button");
+          gomb3.innerHTML = "Kereszt";
+          gomb3.setAttribute("id", "cross");
+          gomb3.addEventListener("click", function () {
+            for (var i = 0; i < nrow; i++) {
+              for (var j = 0; j < ncell; j++) {
+                if (i === row || j === column) {
+                  tt[i][j].dataset.aktiv = 1;
+                  tt[i][j].lastChild.style.filter = "brightness(75%)";
+                }
+              }
+            }
+
+            tt[row][column].dataset.aktiv = 2;
+            tt[row][column].lastChild.style.filter = "brightness(100%)";
+            document.getElementById("cross").style.display = "none";
+          });
+          keret.appendChild(gomb3);
+          sekcio.appendChild(keret);
+          document.body.appendChild(sekcio);
+          nrow = gizsgugya
+          ncell = nrow;
+          tt = new Array(nrow);
+          newrow;
+          lepes = Math.round(nrow * nrow * 0.2);
+          eredetilepes = lepes;
+          row = 0;
+          column = 0;
+          init(lepes);
+        } else {
+          alert("Hibás adat a mezőben!");
+        }
+      }
+
+      function init(lepsek) {
+        document.getElementById("hatralevo").innerHTML += lepsek;
+        for (var i = 0; i < nrow; i++) {
+          newrow = document.getElementById("palya").insertRow(i);
+          tt[i] = new Array(ncell);
+          for (var j = 0; j < ncell; j++) {
+            tt[i][j] = newrow.insertCell(j);
+            tt[i][j].id = i * ncell + j;
+            tt[i][j].onclick = function () {
+              cellClicked(this);
+            };
+            tt[i][j].style.width = "50px";
+            tt[i][j].style.height = "50px";
+            tt[i][j].style.color = "#fcfcfc";
+            tt[i][j].dataset.aktiv = 0;
+            let random = Math.floor(Math.random() * szolok.length);
+            tt[i][j].innerHTML =
+              '<img src="' +
+              szolok[random] +
+              '.png" style="width: 100%; height: 100%; object-fit: cover; display: block; position: relative">';
+            tt[i][j].dataset.ertek = random;
+            tt[i][j].dataset.aktivertek = ertekek[random];
+          }
+        }
+      }
+
+      function clearBackground() {
+        for (var i = 0; i < nrow; i++) {
+          for (var j = 0; j < ncell; j++) {
+            tt[i][j].dataset.aktiv = 0;
+            tt[i][j].lastChild.style.filter = "brightness(100%)";
+          }
+        }
+      }
+
+      function cellClicked(obj) {
+        if (eredetilepes === lepes) {
+          aktivmezo(obj);
+        } else if (obj.dataset.aktiv == 1 && lepes >= 0) {
+          aktivmezo(obj);
+          if (lepes === -1) {
+            if (
+              document.getElementById("highscore").innerHTML <
+              document.getElementById("score").innerHTML
+            ) {
+              document.getElementById("highscore").innerHTML =
+                document.getElementById("score").innerHTML;
+            }
+          }
+        }
+      }
+
+      function cellClickable() {
+        if (row !== nrow - 1) {
+          tt[row + 1][column].dataset.aktiv = 1;
+          tt[row + 1][column].lastChild.style.filter = "brightness(75%)";
+        }
+        if (column !== 0) {
+          tt[row][column - 1].dataset.aktiv = 1;
+          tt[row][column - 1].lastChild.style.filter = "brightness(75%)";
+        }
+        if (column !== ncell - 1) {
+          tt[row][column + 1].dataset.aktiv = 1;
+          tt[row][column + 1].lastChild.style.filter = "brightness(75%)";
+        }
+        if (row !== 0) {
+          tt[row - 1][column].dataset.aktiv = 1;
+          tt[row - 1][column].lastChild.style.filter = "brightness(75%)";
+        }
+      }
+
+      function aktivmezo(obj) {
+        if (lepes !== eredetilepes) {
+          tt[row][column].innerHTML =
+            '<img src="dead.png" style="width: 100%; height: 100%; object-fit: cover; display: block; position: relative">';
+        }
+
+        clearBackground();
+
+        row = parseInt(obj.id / ncell);
+        column = obj.id % ncell;
+        tt[row][column].dataset.aktiv = 2;
+
+        cellClickable();
+
+        document.getElementById("hatralevo").innerHTML = lepes--;
+        document.getElementById("score").innerHTML =
+          Number(document.getElementById("score").innerHTML) +
+          Number(tt[row][column].dataset.aktivertek);
+
+        tt[row][column].innerHTML =
+          '<img src="kosar.jpeg" style="width: 100%; height: 100%; object-fit: cover; display: block; position: relative">';
+        tt[row][column].dataset.aktivertek = 0;
+      }
+    </script>
+  </body>
+</html>
