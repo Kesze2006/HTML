@@ -386,6 +386,16 @@
         } else if (obj.dataset.aktiv == 1 && lepes >= 0) {
           aktivmezo(obj);
           if (lepes === -1) {
+            let gif = document.createElement("div");
+            gif.setAttribute("id","gif");
+            gif.style.backgroundImage = "url(vege.gif)";
+            gif.style.position = "absolute";
+            gif.style.height = "100px";
+            gif.style.width = "100px";
+            gif.style.margin = "auto auto";
+            document.body.appendChild(gif);
+
+
             if (
               document.getElementById("highscore").innerHTML <
               document.getElementById("score").innerHTML
@@ -424,7 +434,7 @@
 
         clearBackground();
 
-        row = parseInt(obj.id / ncell);
+        row = parseInt(obj.id / ncell); 
         column = obj.id % ncell;
         tt[row][column].dataset.aktiv = 2;
 
@@ -438,6 +448,20 @@
         tt[row][column].innerHTML =
           '<img src="kosar.jpeg" style="width: 100%; height: 100%; object-fit: cover; display: block; position: relative">';
         tt[row][column].dataset.aktivertek = 0;
+
+        function vege()
+        {
+          let gif = document.createElement("div")
+          gif.setAttribute("id","gif")
+          gif.style.backgroundImage = "vege.gif"
+          gif.style.position = "absolute";
+          gif.style.height = "100px";
+          gif.style.width = "100px";
+          gif.style.margin = "auto auto";
+
+
+          document.body.appendChild(gif)
+        }
       }
     </script>
   </body>
