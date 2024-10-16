@@ -181,31 +181,22 @@
       </div>
     </section> -->
     <script>
-          var nrow 
-          var ncell
-          var tt 
-          var newrow;
-          var lepes
-          let eredetilepes
-          let row
-          let column
-          let szolok = [
-            "szolo1",
-            "szolo2",
-            "szolo3",
-            "szolo4",
-            "szolo5",
-            "szolo6",
-          ];
-          let ertekek = [16, 8, 9, 13, 10, 10];
+      var nrow;
+      var ncell;
+      var tt;
+      var newrow;
+      var lepes;
+      let eredetilepes;
+      let row;
+      let column;
+      let szolok = ["szolo1", "szolo2", "szolo3", "szolo4", "szolo5", "szolo6"];
+      let ertekek = [16, 8, 9, 13, 10, 10];
       function vizsgal() {
         let gizsgugya = document.getElementById("mezo").value;
-          console.log(gizsgugya)
         if (
-           gizsgugya >= 2 &&
+          gizsgugya >= 2 &&
           Number.isNaN(document.getElementById("mezo")) == false
         ) {
-          
           document.body.innerHTML = "";
           let sekcio = document.createElement("section");
           let szoveg = document.createElement("h1");
@@ -331,7 +322,7 @@
           keret.appendChild(gomb3);
           sekcio.appendChild(keret);
           document.body.appendChild(sekcio);
-          nrow = gizsgugya
+          nrow = gizsgugya;
           ncell = nrow;
           tt = new Array(nrow);
           newrow;
@@ -386,15 +377,24 @@
         } else if (obj.dataset.aktiv == 1 && lepes >= 0) {
           aktivmezo(obj);
           if (lepes === -1) {
-            let gif = document.createElement("div");
-            gif.setAttribute("id","gif");
-            gif.style.backgroundImage = "url(vege.gif)";
-            gif.style.position = "absolute";
-            gif.style.height = "100px";
-            gif.style.width = "100px";
-            gif.style.margin = "auto auto";
-            document.body.appendChild(gif);
-
+            let div = document.createElement("div");
+            div.setAttribute("id", "div");
+            let gif = document.createElement("img");
+            gif.setAttribute("src", "vege.gif");
+            gif.style.width = "100%";
+            gif.style.height = "100%";
+            gif.style.objectFit = "cover";
+            gif.style.display = "inline";
+            gif.style.position = "relative";
+            div.style.height = "200px";
+            div.style.width = "200px";
+            div.style.margin = "auto auto";
+            let szoveg = document.createElement("p")
+            szoveg.innerHTML = "A lépések elfogytak így a játék sajnos végetért!"
+            szoveg.style.display = "inline"
+            div.appendChild(szoveg)
+            div.appendChild(gif);
+            document.body.appendChild(div);
 
             if (
               document.getElementById("highscore").innerHTML <
@@ -434,7 +434,7 @@
 
         clearBackground();
 
-        row = parseInt(obj.id / ncell); 
+        row = parseInt(obj.id / ncell);
         column = obj.id % ncell;
         tt[row][column].dataset.aktiv = 2;
 
@@ -448,20 +448,6 @@
         tt[row][column].innerHTML =
           '<img src="kosar.jpeg" style="width: 100%; height: 100%; object-fit: cover; display: block; position: relative">';
         tt[row][column].dataset.aktivertek = 0;
-
-        function vege()
-        {
-          let gif = document.createElement("div")
-          gif.setAttribute("id","gif")
-          gif.style.backgroundImage = "vege.gif"
-          gif.style.position = "absolute";
-          gif.style.height = "100px";
-          gif.style.width = "100px";
-          gif.style.margin = "auto auto";
-
-
-          document.body.appendChild(gif)
-        }
       }
     </script>
   </body>
