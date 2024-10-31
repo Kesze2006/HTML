@@ -1,9 +1,0 @@
-#asztal .kartya{
-    border: 1px solid red;
-    width: 200px;
-    height: 200px;
-    background-position: center;
-    background-size: cover;
-    display: inline-block;
-    margin: 10px;
-}
