@@ -12,12 +12,12 @@ let szam = 0
 function vizsga()
 {
  szam = Number(document.getElementById("szamBeker").value)
- if(szam >=2 || szam <=100 || szam===Number)
+ if(szam >= 2 && szam <= 100 && !isNaN(szam))
  {
-    document.getElementById("gomb").addEventListener("click",szamitas);
+    szamitas()
  }
  else{
-  console.log("dsf")
+  alert("A szám nem helyes!")
  }
 }
 
