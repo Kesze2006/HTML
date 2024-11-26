@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="hu">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>JSON Generate</title>
+  </head>
+
+  <body onload="init()">
+    <p>
+      Token <br />
+      un6m5dz2imxae872aj4azks30ji6v43dil8q8klz
+    </p>
+    
+    <script>
+      let token = "un6m5dz2imxae872aj4azks30ji6v43dil8q8klz";
+
+      let url = "https://api.json-generator.com/templates/Mq2sLT2T0YXs/data";
+
+      function init() {
+        letoltes();
+      }
+
+      function letoltes() {
+        let xhr = new XMLHttpRequest();
+        xhr.onload = function () {
+          //console.log(this.response);
+          const adatok = JSON.parse(this.responseText);
+          kartya(adatok[0]);
+          //console.log(adatok[0].profile.name);
+        };
+        xhr.open("GET", url + "?access_token=" + token);
+        xhr.send();
+      }
+
+      function kartya(adatLista) {
+        const keret = document.createElement("div");
+        const nev =  kartya2("Név",adatLista.profile.name)
+        const email =  kartya2("Email",adatLista.email)
+        keret.appendChild(nev)
+        keret.appendChild(email)
+        document.body.appendChild(keret)
+
+      }
+
+      function kartya2(nev,adat)
+      {
+        
+        const nevKeret = document.createElement("div");
+        const nevSpan = document.createElement("span");
+        nevSpan.innerHTML = nev+": ";
+        const nevSpanAdat = (document.createElement("span"))
+        nevSpanAdat.innerHTML = adat;
+        nevKeret.appendChild(nevSpan)
+        nevKeret.appendChild(nevSpanAdat)
+        return nevKeret;
+      }
+    </script>
+  </body>
+</html>
