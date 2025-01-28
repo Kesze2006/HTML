@@ -1,0 +1,38 @@
+<html lang="hu">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Valami</title>
+    <style>
+      td
+      {
+        box-sizing: border-box;
+        border: 5px solid red;
+        height: 80px;
+        width: 25px;
+      }
+    </style>
+  </head>
+  <body onload="tablaKeszit(9,9)">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script>
+      function tablaKeszit(oszlop, sor) {
+        let tabla = jQuery("<table>");
+        for (let i = 0; i < sor; i++) {
+          let sor = jQuery("<tr>");
+          for (let k = 0; k < oszlop; k++) {
+            let oszlop = jQuery("<td>");
+            oszlop.click(function()
+          {
+            $(this).fadeToggle()
+          })
+            oszlop.html(i * k);
+            sor.append(oszlop)
+          }
+          tabla.append(sor)
+        }
+        $("body").append(tabla);
+      }
+    </script>
+  </body>
+</html>
