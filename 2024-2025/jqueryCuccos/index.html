@@ -24,7 +24,7 @@
             let oszlop = jQuery("<td>");
             oszlop.click(function()
           {
-            $(this).fadeToggle()
+            $(this).fadeTo("slow", 0.01)
           })
             oszlop.html(i * k);
             sor.append(oszlop)
