@@ -15,6 +15,7 @@
       body {
         background-color: rgb(134, 128, 128);
       }
+
       .content {
         position: absolute;
         top: 50%;
@@ -28,7 +29,6 @@
         padding: 10px;
         z-index: 100;
         display: none;
-        /*to hide popup initially*/
       }
 
       .close-btn {
@@ -49,8 +49,7 @@ a termékekkel (products) kell munkát végeznitöltsétek be a termékeket, és
     >
     <div class="content">
       <div onclick="togglePopup()" class="close-btn">&times</div>
-      <h3>Popup</h3>
-      <p></p>
+      <div id="termekAdat"></div>
     </div>
 
     <script>
@@ -81,12 +80,37 @@ a termékekkel (products) kell munkát végeznitöltsétek be a termékeket, és
         keret.prop("class", "card");
         keret.addClass("col-3");
         keret.on("click", function () {
-          togglePopup();
           $.ajax({
-            url: "https://fakestoreapi.com/products/"+id,
+            url: "https://fakestoreapi.com/products/" + id,
             dataType: "json",
-            success: function () {
-              
+            success: function (data) {
+
+              $("#termekAdat").html("");
+
+              let see = jQuery("<h3>");
+              see.html(data.title);
+              $("#termekAdat").append(see);
+
+              let ar = jQuery("<div>");
+              ar.html("Ár: " + data.price + "€");
+              $("#termekAdat").append(ar);
+
+              let leiras = jQuery("<p>")
+              leir.html("Leírás: "+data.description)
+              $("termekAdat").append(leir)
+
+              let kat = jQuery("<div>")
+              kat.html("Kategória: "+data.category)
+              $("termekAdat").append(kat)
+
+              let kep = jQuery("<img>")
+              kep.prop("src",data.image)
+              $("termekAdat").append(kep)
+
+              let rate = jQuery("<div>")
+              rate.html("Értékelés: $(data.rating.rate) ")
+              $("termekAdat").append(rate)
+              togglePopup();
             },
           });
         });
