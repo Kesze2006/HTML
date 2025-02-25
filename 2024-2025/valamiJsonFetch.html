@@ -22,13 +22,14 @@
         left: 50%;
         transform: translate(-50%, -50%);
         width: 500px;
-        height: 200px;
+        min-height: 200px;
         text-align: center;
         background-color: #e8eae6;
         box-sizing: border-box;
         padding: 10px;
         z-index: 100;
         display: none;
+        padding-top: 50px;
       }
 
       .close-btn {
@@ -47,9 +48,28 @@
     <pre>
 a termékekkel (products) kell munkát végeznitöltsétek be a termékeket, és jelenítsétek meg a termékek nevét, képét leírását, valamilyen gyors, egyszerű css-sel megformázva. A képek ne legyenek túl nagyok!a termékekre kattintva az oldalon, a lista mellett mondjuk, jelenjen meg az ÖSSZES olyan adat, ami a felhasználóra tartozik, és semmi olyan ami csak a működéshez kell.a részleteket bemutató oldalon legyen egy ceruza ikon, amivel egy űrlapon lehet szerkeszteni az adatokat majd utána frissítenilegyen ugyanott egy kuka ikon, ami törli a szerverről (nem valós törlés lesz)ha nem mennek az ikonok, akkor sima gomb legyenlegyen egy "új termék" gomb, amivel új elemet lehet hozzáadni</pre
     >
-    <div class="content">
+    <div class="content container">
       <div onclick="togglePopup()" class="close-btn">&times</div>
-      <div id="termekAdat"></div>
+      <div id="termekAdat" class="row">
+        <div id="termekTitle"></div>
+        <div class="container">
+          <div class="row">
+            <div class="col-8">
+              <div id="termekAr"></div>
+              <div id="termekLeiras"></div>
+              <div id="termekKategoria"></div>
+              <div id="termekErtekeles"></div>
+            </div>
+            <div class="col-4">
+              <div id="termekKep"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="row" id="termekLista"></div>
     </div>
 
     <script>
@@ -84,32 +104,21 @@ a termékekkel (products) kell munkát végeznitöltsétek be a termékeket, és
             url: "https://fakestoreapi.com/products/" + id,
             dataType: "json",
             success: function (data) {
+              $("#termekKep").html("");
+              $("#termekTitle").html("");
 
-              $("#termekAdat").html("");
+              let cim = jQuery("<h3>")
+              cim.html(data.title)
+              $("#termekTitle").append(cim);
+              $("#termekAr").html("Ár: " + data.price + "€");
+              $("#termekLeiras").html("Leírás: " + data.description);
+              $("#termekKategoria").html("Kategória: " + data.category);
 
-              let see = jQuery("<h3>");
-              see.html(data.title);
-              $("#termekAdat").append(see);
+              let kep = jQuery("<img>");
+              kep.prop("src", data.image);
+              $("#termekKep").append(kep);
 
-              let ar = jQuery("<div>");
-              ar.html("Ár: " + data.price + "€");
-              $("#termekAdat").append(ar);
-
-              let leiras = jQuery("<p>")
-              leir.html("Leírás: "+data.description)
-              $("termekAdat").append(leir)
-
-              let kat = jQuery("<div>")
-              kat.html("Kategória: "+data.category)
-              $("termekAdat").append(kat)
-
-              let kep = jQuery("<img>")
-              kep.prop("src",data.image)
-              $("termekAdat").append(kep)
-
-              let rate = jQuery("<div>")
-              rate.html("Értékelés: $(data.rating.rate) ")
-              $("termekAdat").append(rate)
+              $("#termekErtekeles").html("Értékelés: Work in progress");
               togglePopup();
             },
           });
@@ -139,8 +148,5 @@ a termékekkel (products) kell munkát végeznitöltsétek be a termékeket, és
         return keret;
       }
     </script>
-    <div class="container">
-      <div class="row" id="termekLista"></div>
-    </div>
   </body>
 </html>
