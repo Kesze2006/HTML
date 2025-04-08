@@ -23,13 +23,26 @@ h1 div
     letter-spacing: normal;
     text-transform: none;
 }
+#navBar
+{
+    background-color: rgb(18, 112, 132) 
+}
+#felsorolas
+{
+    line-height: 25px;
+    list-style-image: url(../img/icon.png)
+}
+#reszeiKep
+{
+    box-shadow: 2px 2px 5px black
+}
+h2
+{
+    font-variant: small-caps;
+}
 @media only screen and (max-width: 768px) 
 {
     h1{
         font-size: 3em;
     }    
-}
-.d-felx
-{
-    align-items: stretch;
 }
