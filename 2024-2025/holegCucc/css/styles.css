@@ -34,11 +34,21 @@ h1 div
 }
 #reszeiKep
 {
-    box-shadow: 2px 2px 5px black
+    box-shadow: 2px 2px 5px black;
 }
 h2
 {
     font-variant: small-caps;
+}
+#tablazat
+{
+    text-align: center;
+    vertical-align: middle;
+}
+.sorcim
+{
+    font-weight: bold;
+    background-color: rgba(64, 224, 208, 20%) !important;
 }
 @media only screen and (max-width: 768px) 
 {
