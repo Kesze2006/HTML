@@ -7,7 +7,11 @@
     <script src="https://cdn.tiny.cloud/1/k3mwmt1k8wvzdcxp2r1yotpf8hdbaj6f2ush48jgys7adffk/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
     <script>
       tinymce.init({
-        selector: '#mytextarea'
+        selector: 'textarea',
+        language: 'hu_HU',
+        skin: 'fabric',
+        plugins: 'insertdatetime charmap',
+        toolbar: 'insertdatetime charmap'
       });
     </script>
   </head>
