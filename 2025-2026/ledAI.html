@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>32x32 Font Renderer (DIV)</title>
+  <style>
+    body {
+      background-color: #111;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      font-family: sans-serif;
+    }
+
+    #charInput {
+      width: 40px;
+      font-size: 20px;
+      text-align: center;
+    }
+
+    #fontContainer {
+      display: grid;
+      grid-template-columns: repeat(32, 10px); /* 32 oszlop, 10px széles */
+      grid-template-rows: repeat(32, 10px);    /* 32 sor, 10px magas */
+      gap: 1px; /* kis hézag a pixelek között */
+      margin-top: 20px;
+    }
+
+    .pixel {
+      width: 10px;
+      height: 10px;
+      background-color: black;
+    }
+
+    .on {
+      background-color: white;
+    }
+  </style>
+</head>
+<body>
+  <h1>32x32 Font Renderer (DIV)</h1>
+  <label>
+    Válassz betűt:
+    <input id="charInput" type="text" maxlength="1" value="A" />
+  </label>
+  <button id="drawBtn">Rajzol</button>
+
+  <div id="fontContainer"></div>
+
+  <script>
+    const fontContainer = document.getElementById("fontContainer");
+    const charInput = document.getElementById("charInput");
+    const drawBtn = document.getElementById("drawBtn");
+
+    let fontData = null;
+    const PIXEL_SIZE = 10;
+
+    // 32×32 pixel helyek létrehozása
+    function createPixels() {
+      for (let i = 0; i < 32 * 32; i++) {
+        const pixel = document.createElement("div");
+        pixel.classList.add("pixel");
+        fontContainer.appendChild(pixel);
+      }
+    }
+
+    // JSON betöltése
+    async function loadFont() {
+      const response = await fetch("32x32_font_bitmaps.json");
+      fontData = await response.json();
+    }
+
+    // Betű kirajzolása
+    function drawChar(ch) {
+      if (!fontData) return;
+      const bitmap = fontData[ch.toUpperCase()];
+      if (!bitmap) {
+        alert("Nincs ilyen betű a készletben!");
+        return;
+      }
+
+      const pixels = fontContainer.children;
+
+      let i = 0;
+      for (let y = 0; y < 32; y++) {
+        for (let x = 0; x < 32; x++) {
+          const pixel = pixels[i++];
+          if (bitmap[y][x] === "1") {
+            pixel.classList.add("on");
+          } else {
+            pixel.classList.remove("on");
+          }
+        }
+      }
+    }
+
+    // Rajzolás gomb
+    drawBtn.addEventListener("click", () => {
+      const ch = charInput.value || "A";
+      drawChar(ch);
+    });
+
+    // Betöltés után létrehozzuk a pixeleket és kirajzoljuk az "A" betűt
+    createPixels();
+    loadFont().then(() => drawChar("A"));
+  </script>
+</body>
+</html>
