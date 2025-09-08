@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Színes LED-ek</title>
+    <style>
+      .beker {
+        margin: 15px;
+      }
+      input:invalid {
+        border: 2px solid red;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="beker">
+      <label
+        >Egy pixel mérete: <br />
+        Magasság(px):
+        <input type="number" min="1" id="pixelMag" /> Szélesség(px):
+        <input type="number" min="1" id="pixelSzel"
+      /></label>
+    </div>
+    <div class="beker">
+      <label
+        >A színezhető terület mérete pixelekben: <br />
+        Magasság:<input type="number" min="1" id="matrixMag" /> Szélesség:
+        <input type="number" min="1" id="matrixSzel"
+      /></label>
+    </div>
+    <button onclick="general()">Generálás</button>
+    <script>
+      function general() {
+        let szinPick = document.createElement("input");
+        szinPick.type = "color";
+        szinPick.setAttribute("id", "szin");
+        let keret = document.createElement("div");
+        keret.style.placeItems = "center";
+        for (let i = 0; i < document.getElementById("matrixMag").value; i++) {
+          let sor = document.createElement("div");
+          sor.style.fontSize = "0";
+          for (
+            let j = 0;
+            j < document.getElementById("matrixSzel").value;
+            j++
+          ) {
+            let pixel = document.createElement("div");
+            pixel.style.height =
+              document.getElementById("pixelMag").value + "px";
+            pixel.style.width =
+              document.getElementById("pixelSzel").value + "px";
+            pixel.setAttribute("class", "pixel");
+            pixel.style.backgroundColor = "blue";
+            pixel.style.display = "inline-block";
+            pixel.style.border = "1px solid black";
+            pixel.addEventListener("click", () => {
+              pixel.style.background = document.getElementById("szin").value;
+            });
+            sor.appendChild(pixel);
+          }
+          keret.appendChild(sor);
+        }
+        document.body.innerHTML = "";
+        document.body.appendChild(keret);
+        document.body.appendChild(szinPick);
+        let vissza = document.createElement("button");
+        vissza.innerHTML = "Eredeti";
+        vissza.addEventListener("click", () => {
+          document.querySelectorAll(".pixel").forEach((elem) => {
+            elem.style.backgroundColor = "blue";
+          });
+        });
+        document.body.appendChild(vissza);
+      }
+    </script>
+  </body>
+</html>
