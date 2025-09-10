@@ -13,12 +13,12 @@
 
 <div class="container-lg">
     <div class="row">
-        <div class="col-12 text-center">
+        <div class="col-sm-12 text-center">
             <div class="display-1">Az oldal címe</div>
         </div>
     </div>
     <div class="row">
-        <div class="col-4 p-2">
+        <div class="col-sm-4 p-2">
             <div class="card h-100">
                 <div class="card-body">
                     <h5 class="card-title">Card title</h5>
@@ -27,7 +27,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-8 p-2">
+        <div class="col-sm-8 p-2">
             <nav class="navbar navbar-light bg-light">
                 <div class="container-fluid">
                     <span class="navbar-brand mb-0 h1">Navbar</span>
@@ -37,7 +37,7 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-4 justify-content-center">
+        <div class="col-sm-4 justify-content-center">
             <div class="card h-100">
                 <div class="card-body">
                     <h5 class="card-title">Card title</h5>
@@ -46,26 +46,18 @@
                 </div>
             </div>
         </div>
-        <div class="col-8">
+        <div class="col-sm-8">
             <p class="lead">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis vulputate felis quis sollicitudin laoreet. Cras risus felis, sodales ultrices tellus a, aliquam semper dolor. Nunc ac tincidunt libero, ut rutrum elit. Cras tristique, justo eget pharetra finibus, diam leo finibus arcu, vel volutpat orci mauris sit amet massa. Etiam porta id ante et vestibulum. Etiam aliquam commodo lobortis. Mauris tincidunt viverra tristique. Nullam eget magna a lorem rutrum semper eget et dolor.</p>
         </div>
     </div>
     <div class="row">
-        <div class="col-12">
+        <div class="col-sm-12">
             <footer class="bg-dark text-white text-center">
                 <p class="lead">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam a.</p>
             </footer>
         </div>
     </div>
 </div>
-
-
-
-
-
-
-
-
 
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
