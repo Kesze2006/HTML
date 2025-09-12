@@ -46,20 +46,26 @@
           
           let pixel = document.createElement("div");
           pixel.style.height =
-            10 + "px";
+            20 + "px";
           pixel.style.width =
-            10 + "px";
+            20 + "px";
           pixel.setAttribute("class", "pixel");
           pixel.style.backgroundColor = "blue";
           pixel.style.display = "inline-block";
           pixel.style.border = "1px solid black";
+          pixel.addEventListener("click",function(){
+            pixel.style.backgroundColor = "white";
+          })
+          pixel.addEventListener("dblclick",function(){
+            pixel.style.backgroundColor = "blue"
+          })
           sor.appendChild(pixel);
           sorokSzam.push(pixel);
         }
         ledFal.push(sorokSzam);
         keret.appendChild(sor);
       }
-      ledFal[2][2].style.backgroundColor = "green"
+      //ledFal[2][2].style.backgroundColor = "green"
       document.body.innerHTML = "";
       document.body.appendChild(keret);
     }
