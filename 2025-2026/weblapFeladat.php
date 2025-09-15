@@ -3,10 +3,6 @@
     
 ?>
 
-
-
-
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -23,16 +19,24 @@
 <div class="container-lg">
     <div class="row">
         <div class="col-sm-12 text-center">
-            <div class="display-1">Az oldal címe</div>
+            <div class="display-1"><?php
+            echo $adatok["cim"][rand(0,sizeof($adatok["cim"])-1)];
+            ?></div>
         </div>
     </div>
     <div class="row">
         <div class="col-sm-4 p-2">
             <div class="card w-100" >
                 <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                    <h5 class="card-title"><?php
+                    echo $adatok["kartya"]["cim"][rand(0,sizeof($adatok["kartya"]["cim"])-1)];
+                    ?></h5>
+                    <p class="card-text"><?php
+                    echo $adatok["kartya"]["szoveg"][rand(0,sizeof($adatok["kartya"]["szoveg"])-1)];
+                    ?></p>
+                    <a href="<?php
+                    $adatok["kartya"]["link"][rand(0,sizeof($adatok["kartya"]["link"])-1)];
+                    ?>" class="btn btn-primary">Go somewhere</a>
                 </div>
             </div>
         </div>
@@ -50,9 +54,15 @@
         <div class="col-sm-4 justify-content-center p-2">
             <div class="card h-100">
                 <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                    <h5 class="card-title"><?php
+                    echo $adatok["kartya"]["cim"][rand(0,sizeof($adatok["kartya"]["cim"])-1)];
+                    ?></h5>
+                    <p class="card-text"><?php
+                    echo $adatok["kartya"]["szoveg"][rand(0,sizeof($adatok["kartya"]["szoveg"])-1)];
+                    ?></p>
+                    <a href="<?php
+                    $adatok["kartya"]["link"][rand(0,sizeof($adatok["kartya"]["link"])-1)];
+                    ?>" class="btn btn-primary">Go somewhere</a>
                 </div>
             </div>
         </div>
