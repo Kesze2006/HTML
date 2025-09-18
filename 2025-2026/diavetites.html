@@ -9,7 +9,7 @@
     <title>Lapozós cucc</title>
 </head>
 
-<body>
+<body onload="init()">
     <div class="container">
 
         <div class="row">
@@ -29,47 +29,47 @@
                         <h1 class="text-center text-success">1. Taratlom</h1>
                     </div>
                 </div>
-                <div class="row d-none" id="tartalom-2">
+                <div class="row" id="tartalom-2">
                     <div class="col-12">
                         <h1 class="text-center text-success">2. Taratlom</h1>
                     </div>
                 </div>
-                <div class="row d-none" id="tartalom-3">
+                <div class="row" id="tartalom-3">
                     <div class="col-12">
                         <h1 class="text-center text-success">3. Taratlom</h1>
                     </div>
                 </div>
-                <div class="row d-none" id="tartalom-4">
+                <div class="row" id="tartalom-4">
                     <div class="col-12">
                         <h1 class="text-center text-success">4. Taratlom</h1>
                     </div>
                 </div>
-                <div class="row d-none" id="tartalom-5">
+                <div class="row" id="tartalom-5">
                     <div class="col-12">
                         <h1 class="text-center text-success">5. Taratlom</h1>
                     </div>
                 </div>
-                <div class="row d-none" id="tartalom-6">
+                <div class="row" id="tartalom-6">
                     <div class="col-12">
                         <h1 class="text-center text-success">6. Taratlom</h1>
                     </div>
                 </div>
-                <div class="row d-none" id="tartalom-7">
+                <div class="row" id="tartalom-7">
                     <div class="col-12">
                         <h1 class="text-center text-success">7. Taratlom</h1>
                     </div>
                 </div>
-                <div class="row d-none" id="tartalom-8">
+                <div class="row" id="tartalom-8">
                     <div class="col-12">
                         <h1 class="text-center text-success">8. Taratlom</h1>
                     </div>
                 </div>
-                <div class="row d-none" id="tartalom-9">
+                <div class="row" id="tartalom-9">
                     <div class="col-12">
                         <h1 class="text-center text-success">9. Taratlom</h1>
                     </div>
                 </div>
-                <div class="row d-none" id="tartalom-10">
+                <div class="row" id="tartalom-10">
                     <div class="col-12">
                         <h1 class="text-center text-success">10. Taratlom</h1>
                     </div>
@@ -79,16 +79,76 @@
         </div>
     </div>
     <script>
+        function init() {
+            menuKeszit()
+        }
+
         const taratlomDb = 10;
+        let aktualisTartalom = 1
         function ugras(oldalSzam) {
+            let menu = document.getElementsByClassName("pagination")[0]
+            menu.children[aktualisTartalom].classList.remove("active")
+            if (oldalSzam === -1) {
+
+
+                if (aktualisTartalom > 1) {
+                    for (let i = 1; i <= taratlomDb; i++) {
+                        document.getElementById("tartalom-" + i).classList.add("d-none")
+
+                    }
+                    document.getElementById("tartalom-" + (aktualisTartalom - 1)).classList.remove("d-none")
+                    aktualisTartalom--
+                }
+
+            }
+            else if (oldalSzam === 0) {
+
+            }
+            else {
+
+                for (let i = 1; i <= taratlomDb; i++) {
+                    document.getElementById("tartalom-" + i).classList.add("d-none")
+                    document.getElementById("tartalom-" + oldalSzam).classList.remove("d-none")
+                }
+                aktualisTartalom = oldalSzam
+            }
+            menu.children[aktualisTartalom].classList.add("active")
+        }
+
+        function menuKeszit() {
+            let menu = document.getElementsByClassName("pagination")[0]
+            menu.innerHTML = ""
+            let elem = document.createElement("li")
+            elem.classList.add("page-item")
+            let link = document.createElement("a")
+            link.classList.add("page-link")
+            link.href = "#"
+            link.addEventListener("click", function () { ugras(-1) })
+            link.innerHTML = "Előző"
+            elem.appendChild(link)
+            menu.appendChild(elem)
+
             for (let i = 1; i <= taratlomDb; i++) {
-                document.getElementById("tartalom-" + i).classList.add("d-none")
-                document.getElementById("tartalom-" + oldalSzam).classList.remove("d-none")
+                let elem = document.createElement("li")
+                elem.classList.add("page-item")
+                let link = document.createElement("a")
+                link.classList.add("page-link")
+                link.href = "#"
+                link.addEventListener("click", function () { ugras(i) })
+                link.innerHTML = i
+                elem.appendChild(link)
+                menu.appendChild(elem)
             }
 
-            function menuKeszit() {
-                document.getElementsByClassName("pagination")[0].innerHTML = ""
-            }
+            elem = document.createElement("li")
+            elem.classList.add("page-item")
+            link = document.createElement("a")
+            link.classList.add("page-link")
+            link.href = "#"
+            link.addEventListener("click", function () { ugras(0) })
+            link.innerHTML = "Következő"
+            elem.appendChild(link)
+            menu.appendChild(elem)
         }
     </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
