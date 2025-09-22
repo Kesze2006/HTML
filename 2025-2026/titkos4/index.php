@@ -3,6 +3,7 @@
     if(isset($_GET["action"]) && $_GET["action"] == "logout")
     {
         session_destroy();
+        header('Location: '.$_SERVER['PHP_SELF']);
     }
 ?>
 <!DOCTYPE html>
@@ -23,6 +24,8 @@
     if (isset($_SESSION["user"]) && $_SESSION["user"]=="akos" && isset($_SESSION["jelszo"]) && $_SESSION["jelszo"]=="1234") {
         echo "<a href='".$_SERVER['PHP_SELF']."'>Link</a>";
         echo "<a href='".$_SERVER['PHP_SELF']."?action=logout'class=\"btn btn-primary\" >Link</a>";
+
+        
     }
     else
     {
