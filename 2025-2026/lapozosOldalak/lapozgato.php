@@ -3,8 +3,16 @@
 
   function menuPont($szoveg,$tartalomId,$aktivMenu)
   {
-    return '<li class="page-item"><a class="page-link" href="'.$_SERVER["PHP_SELF"].'?oldal='.$tartalomId.'">'.$szoveg.'</a></li>'
+    return '<li class="page-item'.($aktivMenu?" active":"").'"><a class="page-link" href="'.$_SERVER["PHP_SELF"].'?oldal='.$tartalomId.'">'.$szoveg.'</a></li>';
   }
+  $menu.=menuPont("Előző",-1,false);
+
+  for($i = 1;$i <= 10; $i++)
+  {
+    $menu.=menuPont($i,$i,(isset($_GET["oldal"])&&$_GET["oldal"]==$i) || (!isset($_GET["oldal"]) && $i==1));
+  }
+
+  $menu.=menuPont("Következő","next",false);
 ?>
 
 
@@ -28,63 +36,14 @@
       <div class="col-12 col-lg-8 container">
         <nav aria-label="Page navigation example">
           <ul class="pagination justify-content-center">
-            <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-            <li class="page-item"><a class="page-link" href="#">1</a></li>
-            <li class="page-item"><a class="page-link" href="#">2</a></li>
-            <li class="page-item"><a class="page-link" href="#">3</a></li>
-            <li class="page-item"><a class="page-link" href="#">Next</a></li>
+            <?php
+              echo $menu;
+            ?>
           </ul>
         </nav>
-        <div class="row" id="tartalom-1">
-          <div class="col-12">
-            <h1 class="text-center text-success">1. Taratlom</h1>
-          </div>
-        </div>
-        <div class="row" id="tartalom-2">
-          <div class="col-12">
-            <h1 class="text-center text-success">2. Taratlom</h1>
-          </div>
-        </div>
-        <div class="row" id="tartalom-3">
-          <div class="col-12">
-            <h1 class="text-center text-success">3. Taratlom</h1>
-          </div>
-        </div>
-        <div class="row" id="tartalom-4">
-          <div class="col-12">
-            <h1 class="text-center text-success">4. Taratlom</h1>
-          </div>
-        </div>
-        <div class="row" id="tartalom-5">
-          <div class="col-12">
-            <h1 class="text-center text-success">5. Taratlom</h1>
-          </div>
-        </div>
-        <div class="row" id="tartalom-6">
-          <div class="col-12">
-            <h1 class="text-center text-success">6. Taratlom</h1>
-          </div>
-        </div>
-        <div class="row" id="tartalom-7">
-          <div class="col-12">
-            <h1 class="text-center text-success">7. Taratlom</h1>
-          </div>
-        </div>
-        <div class="row" id="tartalom-8">
-          <div class="col-12">
-            <h1 class="text-center text-success">8. Taratlom</h1>
-          </div>
-        </div>
-        <div class="row" id="tartalom-9">
-          <div class="col-12">
-            <h1 class="text-center text-success">9. Taratlom</h1>
-          </div>
-        </div>
-        <div class="row" id="tartalom-10">
-          <div class="col-12">
-            <h1 class="text-center text-success">10. Taratlom</h1>
-          </div>
-        </div>
+        <?php
+          
+        ?>
       </div>
       <div class="col-12 col-lg-2 bg-primary"></div>
     </div>
