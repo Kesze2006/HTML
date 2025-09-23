@@ -1,18 +1,26 @@
 <?php
   $menu="";
 
-  function menuPont($szoveg,$tartalomId,$aktivMenu)
+  function menuPont($szoveg,$tartalomId,$aktivMenu,$enabled)
   {
-    return '<li class="page-item'.($aktivMenu?" active":"").'"><a class="page-link" href="'.$_SERVER["PHP_SELF"].'?oldal='.$tartalomId.'">'.$szoveg.'</a></li>';
+    if($enabled)
+    {
+      return '<li class="page-item'.($aktivMenu?" active":"").'"><a class="page-link" href="'.$_SERVER["PHP_SELF"].'?oldal='.$tartalomId.'">'.$szoveg.'</a></li>';
+    }
+    else
+    {
+      return '<li class="page-item'.($aktivMenu?" active":"").'"><a class="page-link" href="'.$_SERVER["PHP_SELF"].'?oldal='.$tartalomId.'">'.$szoveg.'</a></li>';
+    }
   }
-  $menu.=menuPont("Előző",-1,false);
+
+  $menu.=menuPont("Előző",$_GET["oldal"]-1,false,$_GET["oldal"]!=1);
 
   for($i = 1;$i <= 10; $i++)
   {
-    $menu.=menuPont($i,$i,(isset($_GET["oldal"])&&$_GET["oldal"]==$i) || (!isset($_GET["oldal"]) && $i==1));
+    $menu.=menuPont($i,$i,(isset($_GET["oldal"])&&$_GET["oldal"]==$i) || (!isset($_GET["oldal"]) && $i==1),true);
   }
 
-  $menu.=menuPont("Következő","next",false);
+  $menu.=menuPont("Következő","next",false,true);
 ?>
 
 
@@ -29,7 +37,7 @@
   <title>Lapozós cucc</title>
 </head>
 
-<body onload="init()">
+<body>
   <div class="container">
     <div class="row">
       <div class="col-12 col-lg-2 bg-primary"></div>
@@ -42,7 +50,14 @@
           </ul>
         </nav>
         <?php
-          
+          if(!isset($_GET["oldal"]))
+          {
+            include("include/tartalom"."1".".php");
+          }
+          else
+          {
+            include("include/tartalom".$_GET["oldal"].".php");
+          }
         ?>
       </div>
       <div class="col-12 col-lg-2 bg-primary"></div>
