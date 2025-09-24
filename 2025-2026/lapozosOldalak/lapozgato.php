@@ -9,21 +9,25 @@
     }
     else
     {
-      return '<li class="page-item'.($aktivMenu?" active":"").'"><a class="page-link" href="'.$_SERVER["PHP_SELF"].'?oldal='.$tartalomId.'">'.$szoveg.'</a></li>';
+      return '<li class="page-item disable"><a class="page-link">'.$szoveg.'</a></li>';
     }
   }
 
-  $menu.=menuPont("Előző",$_GET["oldal"]-1,false,$_GET["oldal"]!=1);
+  $menu.=menuPont("Előző",
+    (isset($_GET["oldal"])?$_GET["oldal"]-1:1),
+    false,
+    (isset($_GET["oldal"])?$_GET["oldal"]>1&&$_GET["oldal"]<=10:false));
 
   for($i = 1;$i <= 10; $i++)
   {
     $menu.=menuPont($i,$i,(isset($_GET["oldal"])&&$_GET["oldal"]==$i) || (!isset($_GET["oldal"]) && $i==1),true);
   }
 
-  $menu.=menuPont("Következő","next",false,true);
+  $menu.=menuPont("Következő",
+    (isset($_GET["oldal"])?$_GET["oldal"]+1:2),
+    false,
+    (isset($_GET["oldal"])?$_GET["oldal"]<10&&$_GET["oldal"]>=1:true));
 ?>
-
-
 
 
 <!DOCTYPE html>
