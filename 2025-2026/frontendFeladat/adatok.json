@@ -1,9 +1,7 @@
 {
     "cim":
     [
-        "Lajos kirándul",
-        "Valaki a mező szélén",
-        "A tenger alján van egy lik"
+        "Lajos kirándul"
     ],
     "kep":
     [
@@ -12,9 +10,5 @@
     "szoveg":
     [
         "Valami random szöveg mert kell az is szóval van valami"
-    ],
-    "lista":
-    [
-           
     ]
 }
