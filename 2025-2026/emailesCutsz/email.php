@@ -1,19 +1,21 @@
 <?php
     session_start();
-    $_SESSION["emailTipusok"] = [];
+    if(!isset($_SESSION["emailTipusok"]))
+    {
+        $_SESSION["emailTipusok"] = [];
+    }
     $tipus = explode("@",$_GET["email"]);
-
+    var_dump($_SESSION["emailTipusok"]);
     if(in_array($tipus[1],$_SESSION["emailTipusok"]))
     {
         $_SESSION["emailTipusok"][$tipus[1]]++;
+        echo "van ilyen";
     }
     else
     {
-        $_SESSION["emailTipusok"][] = $tipus[1];
-        $_SESSION["emailTipusok"][$tipus[1]]++;
+        $_SESSION["emailTipusok"][$tipus[1]] = 1;
     }
-    echo $_SESSION["emailTipusok"][0][0];
-    echo $_SESSION["emailTipusok"][$tipus[1]];
+    echo $_SESSION["emailTipusok"]["gmail.com"];
 ?>
 
 <!DOCTYPE html>
