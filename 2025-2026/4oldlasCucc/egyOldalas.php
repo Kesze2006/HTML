@@ -2,7 +2,16 @@
     session_start();
     if(!isset($oldal))
     {
-      $oldal = $_GET["oldal"];
+      if(isset($_GET["oldal"]))
+      {
+        $oldal = $_GET["oldal"];
+      }
+      
+      else
+      {
+        $oldal=1;
+      }
+      
     }
 
     if(!isset($_SESSION["oldal_".$oldal]))
