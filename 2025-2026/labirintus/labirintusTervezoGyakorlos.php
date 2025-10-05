@@ -1,4 +1,5 @@
 <?php
+    session_start();
     function d($elem)
     {
         echo "<pre>";
@@ -31,13 +32,15 @@
 
 
 
-    session_start();
     $config["oszlop"]=10;
     $config["sor"]=10;
 
-
     if(isset($_GET))
     {
+        if(!isset($_SESSION["mentettSzam"]))
+        {
+            $_SESSION["mentettSzam"] = 1;
+        }
         $t = array_keys($_GET);
         foreach($t as $index)
         {
@@ -57,13 +60,35 @@
                 }
             }
         }
+        
         if(isset($_GET["save"]))
+            {
+                if(!isset($_SESSION["lista"]))
+                {
+                    $_SESSION["lista"] = [];
+                }
+                $_SESSION["mentettLabirintusok"][$_GET["save"]] = $_SESSION["labirintus"];
+                if(isset($_SESSION["mentettSzam"]))
+                {
+                    $_SESSION["lista"][] = '<li><button type="submit" name="betolt" value="'.$_SESSION["mentettSzam"].'">'.$_SESSION["mentettSzam"].'. mentett labirintus</button></li>';
+                }
+                    
+
+                $_SESSION["mentettSzam"] = ($_SESSION["mentettSzam"] ?? 0) + 1; //Ha a $_SESSION["mentettSzam"] még nincs beállítva, akkor 0-t vesz alapul, és hozzáad 1-et. 👌
+            }
+        //d($_SESSION["mentettLabirintusok"]);
+        if(isset($_GET["betolt"]))
         {
-            $_SESSION["mentettLabirintusok"][$_GET["save"]] = $_SESSION["labirintus"];
+            if(array_key_exists($_GET["betolt"], $_SESSION["mentettLabirintusok"]))
+            {
+                $_SESSION["labirintus"] = $_SESSION["mentettLabirintusok"][$_GET["betolt"]];
+            }
         }
     }
-    d($_SESSION["mentettLabirintusok"][$_GET["save"]]);
+    //d($_SESSION["lista"]);
+    //d($_SESSION["mentettLabirintusok"][$_GET["save"]]);
     $tablaKesz = tablaKeszit();
+    //echo $_SESSION["mentettSzam"];
 ?>
 
 
@@ -97,7 +122,12 @@
     <h1>Labirintus szerkesztő</h1>
     <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="get">
         <?php echo $tablaKesz;?>
-        <button type="submit" name="save" value="1">Mentés</button>        
+        <button type="submit" name="save" value="<?php if(isset($_SESSION["mentettSzam"])) echo $_SESSION["mentettSzam"] ?>">Mentés</button>        
+    
+        <h2>Mentett labirintusok</h2>
+        <ul>
+            <?php if(isset($_SESSION["lista"])) foreach($_SESSION["lista"] as $elem){echo $elem;}; ?>
+        </ul>
     </form>
 </body>
 </html>
