@@ -25,13 +25,21 @@
     <input type="button" onclick="feladat3()" value="Keresés" class="btn btn-info">
     <div id="eredmeny3"></div>
 
+    <label>4. feladat: 40.000 feletti külföldi író:</label>
+    <input type="button" onclick="feladat4()" value="Keresés" class="btn btn-info">
+    <div id="eredmeny4"></div>
+
+    <label>5. feladat: Statisztika:</label>
+    <input type="button" onclick="feladat5()" value="Keresés" class="btn btn-info">
+    <div id="eredmeny5"></div>
+
     <script>
         let adatok = []
         fetch("kiadas2.json")
             .then((res) => res.json())
             .then((json) => adatok = json);
 
-        
+
         function feladat2() {
             let nev = document.querySelector("#szerzonev").value
             let nevdarab = nev.split(" ");
@@ -48,18 +56,45 @@
         }
 
         function feladat3() {
-            let legnagyobb = adatok.map(e => e.peldanyszam).toSorted(function(a, b){return b-a})[0]; //b-a Csökkenő a-b Növekvő
-            let legnagyobb2 = Math.max(...adatok.map(e=>e.peldanyszam))
-            let talalatok = adatok.filter(e=> e.peldanyszam == legnagyobb);
-            
-            document.getElementById("eredmeny3").innerHTML = "Legnagyobb példányszám "+talalatok[0].peldanyszam+""
+            let legnagyobb = adatok.map(e => e.peldanyszam).toSorted(function (a, b) { return b - a })[0]; //b-a Csökkenő a-b Növekvő
+            let legnagyobb2 = Math.max(...adatok.map(e => e.peldanyszam))
+            let talalatok = adatok.filter(e => e.peldanyszam == legnagyobb);
+
+            document.getElementById("eredmeny3").innerHTML = "Legnagyobb példányszám " + talalatok[0].peldanyszam + ", előfordúlt " + talalatok.length;
         }
 
+        function feladat4() {
+            let talalat = adatok.find(e => e.nemzetiseg == "kf" && e.peldanyszam >= 40000);
+            document.getElementById("eredmeny4").innerHTML = talalat.ev + "/" + talalat.negyedev + ": " + talalat.mu;
+        }
+        let tabla = document.createElement("table");
+        function feladat5() {
 
-
-
-
-
+            let talalatok = {};
+            adatok.forEach(e=>{
+                if(talalatok[e.ev] === undefined)
+            {
+                talalatok[e.ev] = {"ma":[],"kf":[]};
+            }
+                talalatok[e.ev][e.nemzetiseg].push(e.peldanyszam);
+            })
+            for(let [ev,kiadasok] of Object.entries(talalatok))
+            {
+                let sor = document.createElement("tr");
+                let cellaMagyar = document.createElement("td");
+                let cellaEv = document.createElement("td");
+                let cellaMagyarPeldanyszam = document.createElement("td")
+                cellaEv.innerHTML = ev;
+                cellaMagyar.innerHTML = kiadasok.ma.length;
+                cellaMagyarPeldanyszam.innerHTML = kiadasok.ma.reduce((osszeg,e)=> osszeg+e);
+                sor.appendChild(cellaMagyar);
+                sor.appendChild(cellaEv);
+                sor.appendChild(cellaMagyarPeldanyszam);
+                tabla.appendChild(sor);
+            }
+            //console.log(talalatok)
+             document.getElementById("eredmeny5").appendChild(tabla);
+        }
 
     </script>
 </body>
