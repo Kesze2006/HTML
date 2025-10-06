@@ -60,7 +60,7 @@
             $_SESSION["mentettLabirintusok"][$_GET["save"]] = $_SESSION["labirintus"];
         }
     }
-    d($_SESSION["mentettLabirintusok"]);
+    //d($_SESSION["mentettLabirintusok"]);
     $tablaKesz = tablaKeszit();
 ?>
 
