@@ -4,18 +4,18 @@
     {
         $_SESSION["emailTipusok"] = [];
     }
-    if(isset($_GET["email"]))
+    $tipus = explode("@",$_GET["email"]);
+    var_dump($_SESSION["emailTipusok"]);
+    if(in_array($tipus[1],$_SESSION["emailTipusok"]))
     {
-        $tipus = explode("@",$_GET["email"]);
-        if(array_key_exists($tipus[1],$_SESSION["emailTipusok"]))
-        {
-            $_SESSION["emailTipusok"][$tipus[1]]++;
-        }
-        else
-        {
-            $_SESSION["emailTipusok"][$tipus[1]] = 1;
-        }
+        $_SESSION["emailTipusok"][$tipus[1]]++;
+        echo "van ilyen";
     }
+    else
+    {
+        $_SESSION["emailTipusok"][$tipus[1]] = 1;
+    }
+    echo $_SESSION["emailTipusok"]["gmail.com"];
 ?>
 
 <!DOCTYPE html>
@@ -36,7 +36,7 @@
             </form>
         </div>
         <div class="row">
-            <h1><?php echo $tipus[1].": ".$_SESSION["emailTipusok"][$tipus[1]]; ?></h1>
+            <h1><?php echo $_SESSION["emailTipusok"][$tipus[1]]; ?></h1>
         </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
