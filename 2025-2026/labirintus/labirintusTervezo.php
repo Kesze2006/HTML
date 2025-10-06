@@ -29,7 +29,23 @@
         return $vissza;
     }
 
-
+    function mentettLabirintusRajzol($id)
+    {
+        global $config;
+        $vissza="";
+        $vissza .= '<div>';
+        for($sor=0;$sor < $config["sor"];$sor++)
+        {
+            $vissza .= '<div>';
+            for($cella=0;$cella < $config["oszlop"];$cella++)
+            {
+                $vissza .= '<div style="border: 1px solid black;width: 5px;height: 5px;display: inline-block"></div>';
+            }
+            $vissza .= "</div>";
+        }
+        $vissza .= '</div>';
+        return $vissza;
+    }
 
     session_start();
     $config["oszlop"]=10;
@@ -60,14 +76,15 @@
         if(isset($_GET["save"]))
         {
             $_SESSION["mentettLabirintusok"][$_GET["save"]] = $_SESSION["labirintus"];
+
+        }
+        if(isset($_GET["new"]) && $_GET["new"] == 1)
+        {
+            $_SESSION["labirintus"] = [];
         }
     }
-<<<<<<< HEAD
-    //d($_SESSION["mentettLabirintusok"]);
-=======
-    d($_SESSION["mentettLabirintusok"][$_GET["save"]]);
->>>>>>> eb1830a4814053c8c4a287460b51c8aee2fd00a5
     $tablaKesz = tablaKeszit();
+    $kisKep = mentettLabirintusRajzol(1);
 ?>
 
 
@@ -101,7 +118,9 @@
     <h1>Labirintus szerkesztő</h1>
     <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="get">
         <?php echo $tablaKesz;?>
-        <button type="submit" name="save" value="1">Mentés</button>        
+        <button type="submit" name="save" value="1">Mentés</button>
+        <button type="submit" name="new" value="1">Új labirintus</button>
+        <?php echo $kisKep; ?>       
     </form>
 </body>
 </html>

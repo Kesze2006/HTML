@@ -84,6 +84,12 @@
                 $_SESSION["labirintus"] = $_SESSION["mentettLabirintusok"][$_GET["betolt"]];
             }
         }
+        //Törlés
+        if(isset($_GET["new"]) && $_GET["new"] == 1)
+        {
+            $_SESSION["labirintus"] = [];
+        }
+        
     }
     //d($_SESSION["lista"]);
     //d($_SESSION["mentettLabirintusok"][$_GET["save"]]);
@@ -123,7 +129,7 @@
     <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="get">
         <?php echo $tablaKesz;?>
         <button type="submit" name="save" value="<?php if(isset($_SESSION["mentettSzam"])) echo $_SESSION["mentettSzam"] ?>">Mentés</button>        
-    
+        <button type="submit" name="new" value="1">Új labirintus</button>        
         <h2>Mentett labirintusok</h2>
         <ul>
             <?php if(isset($_SESSION["lista"])) foreach($_SESSION["lista"] as $elem){echo $elem;}; ?>
