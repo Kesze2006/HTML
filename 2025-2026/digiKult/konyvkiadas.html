@@ -67,33 +67,54 @@
             let talalat = adatok.find(e => e.nemzetiseg == "kf" && e.peldanyszam >= 40000);
             document.getElementById("eredmeny4").innerHTML = talalat.ev + "/" + talalat.negyedev + ": " + talalat.mu;
         }
-        let tabla = document.createElement("table");
+
         function feladat5() {
+            let tabla = document.createElement("table");
+
+            /*console.log(["Év","Magyar kiadások","Magyar példányszám","Külföldi kiadások","Külföldi példányszám"]
+             .map(e=>document.createElement("th"))
+             .reduce((tr,e)=>tr.appendChild(e),document.createElement("tr")))
+             */
+            const tr = ["Év", "Magyar kiadások", "Magyar példányszám", "Külföldi kiadások", "Külföldi példányszám"]
+                .map(e => {
+                    const th = document.createElement("th");
+                    th.textContent = e;   // vagy: th.innerHTML = e;
+                    return th;
+                })
+                .reduce((tr, e) => {
+                    tr.appendChild(e);
+                    return tr;
+                }, document.createElement("tr"));
+                tabla.appendChild(tr)
 
             let talalatok = {};
-            adatok.forEach(e=>{
-                if(talalatok[e.ev] === undefined)
-            {
-                talalatok[e.ev] = {"ma":[],"kf":[]};
-            }
+            adatok.forEach(e => {
+                if (talalatok[e.ev] === undefined) {
+                    talalatok[e.ev] = { "ma": [], "kf": [] };
+                }
                 talalatok[e.ev][e.nemzetiseg].push(e.peldanyszam);
             })
-            for(let [ev,kiadasok] of Object.entries(talalatok))
-            {
+            for (let [ev, kiadasok] of Object.entries(talalatok)) {
                 let sor = document.createElement("tr");
                 let cellaMagyar = document.createElement("td");
                 let cellaEv = document.createElement("td");
                 let cellaMagyarPeldanyszam = document.createElement("td")
                 cellaEv.innerHTML = ev;
                 cellaMagyar.innerHTML = kiadasok.ma.length;
-                cellaMagyarPeldanyszam.innerHTML = kiadasok.ma.reduce((osszeg,e)=> osszeg+e);
+                cellaMagyarPeldanyszam.innerHTML = kiadasok.ma.reduce((osszeg, e) => osszeg + e);
                 sor.appendChild(cellaMagyar);
                 sor.appendChild(cellaEv);
                 sor.appendChild(cellaMagyarPeldanyszam);
+                let cellaKulfoldi = document.createElement("td");
+                let cellaKulfoldiPeldanyszam = document.createElement("td")
+                cellaKulfoldi.innerHTML = kiadasok.kf.length;
+                cellaKulfoldiPeldanyszam.innerHTML = kiadasok.ma.reduce((osszeg, e) => osszeg + e);
+                sor.appendChild(cellaKulfoldi);
+                sor.appendChild(cellaKulfoldiPeldanyszam);
                 tabla.appendChild(sor);
             }
             //console.log(talalatok)
-             document.getElementById("eredmeny5").appendChild(tabla);
+            document.getElementById("eredmeny5").appendChild(tabla);
         }
 
     </script>
