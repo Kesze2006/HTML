@@ -33,6 +33,10 @@
     <input type="button" onclick="feladat5()" value="Keresés" class="btn btn-info">
     <div id="eredmeny5"></div>
 
+    <label>6. feladat: </label>
+    <input type="button" onclick="feladat6()" value="Keresés" class="btn btn-info">
+    <div id="eredmeny6"></div>
+
     <script>
         let adatok = []
         fetch("kiadas2.json")
@@ -102,8 +106,8 @@
                 cellaEv.innerHTML = ev;
                 cellaMagyar.innerHTML = kiadasok.ma.length;
                 cellaMagyarPeldanyszam.innerHTML = kiadasok.ma.reduce((osszeg, e) => osszeg + e);
-                sor.appendChild(cellaMagyar);
                 sor.appendChild(cellaEv);
+                sor.appendChild(cellaMagyar);
                 sor.appendChild(cellaMagyarPeldanyszam);
                 let cellaKulfoldi = document.createElement("td");
                 let cellaKulfoldiPeldanyszam = document.createElement("td")
@@ -115,6 +119,18 @@
             }
             //console.log(talalatok)
             document.getElementById("eredmeny5").appendChild(tabla);
+        }
+        function feladat6()
+        {
+            const talalat={};
+            adatok.forEach(elem=>{
+                if(talalat[elem.mu] === undefined)talalat[elem.mu] = [];
+                talalat[elem.mu].push(elem.peldanyszam);
+            })
+            talalat2 = Object.keys(talalat)
+            .filter(e=> talalat[e].length >= 3)
+            .filter(k => talalat[k][0]<talalat[k][1] && talalat[k][0] < talalat[k][2])
+            document.getElementById("eredmeny6").innerHTML = talalat2
         }
 
     </script>

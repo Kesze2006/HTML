@@ -33,17 +33,27 @@
     {
         global $config;
         $vissza="";
-        $vissza .= '<div>';
+        $vissza = '<form method="get" action="'.$_SERVER["PHP_SELF"].'" id="kicsi'.$id.'">';
+        $vissza .= '<div style="display: inline-block;margin: 5px 10px" onclick="document.getElementById(\'kicsi'.$id.'\').submit()">';
         for($sor=0;$sor < $config["sor"];$sor++)
         {
-            $vissza .= '<div>';
+            $vissza .= '<div style="font-size: 0">';
             for($cella=0;$cella < $config["oszlop"];$cella++)
             {
-                $vissza .= '<div style="border: 1px solid black;width: 5px;height: 5px;display: inline-block"></div>';
+                //if(isset($_SESSION["labirintus"][$sor][$cella]) == true) echo $sor." ".$cella."; ";
+                if(isset($_SESSION["mentettLabirintusok"][$id][$sor][$cella]) && $_SESSION["mentettLabirintusok"][$id][$sor][$cella])
+                {
+                    $vissza .= '<div style="border: 1px solid black;width: 5px;height: 5px;display: inline-block;background-color: black"></div>';
+                }
+                else
+                {
+                    $vissza .= '<div style="border: 1px solid black;width: 5px;height: 5px;display: inline-block;"></div>';
+                }
             }
             $vissza .= "</div>";
         }
         $vissza .= '</div>';
+        $vissza .= '</form>';
         return $vissza;
     }
 
@@ -84,7 +94,15 @@
         }
     }
     $tablaKesz = tablaKeszit();
-    $kisKep = mentettLabirintusRajzol(1);
+    $kisKep = "";
+    if(isset($_SESSION["mentettLabirintusok"]))
+    {
+        $t = array_keys($_SESSION["mentettLabirintusok"]);
+        foreach($t as $id)
+        {
+            $kisKep .= mentettLabirintusRajzol($id);
+        }
+    }
 ?>
 
 
@@ -119,8 +137,8 @@
     <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method="get">
         <?php echo $tablaKesz;?>
         <button type="submit" name="save" value="1">Mentés</button>
-        <button type="submit" name="new" value="1">Új labirintus</button>
-        <?php echo $kisKep; ?>       
+        <button type="submit" name="new" value="1">Új labirintus</button><br>    
     </form>
+    <?php echo $kisKep; ?>  
 </body>
 </html>
