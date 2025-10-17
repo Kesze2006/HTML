@@ -42,7 +42,7 @@
         fetch("kiadas2.json")
             .then((res) => res.json())
             .then((json) => adatok = json);
-
+        console.log(adatok)
 
         function feladat2() {
             let nev = document.querySelector("#szerzonev").value

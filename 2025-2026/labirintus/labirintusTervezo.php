@@ -103,6 +103,7 @@
             $kisKep .= mentettLabirintusRajzol($id);
         }
     }
+    d($_SESSION["labirintus"])
 ?>
 
 
