@@ -40,4 +40,32 @@
     fclose($fajl);
     //d($adatok);
     echo feladat2();
+    if(isset($_GET))
+    {
+        if(isset($_GET["szallitasId"]))
+        {
+            if($_GET["szallitasId"] != "")
+            {
+                $szId = $_GET["szallitasId"]-1;
+            }
+            else
+            {
+                $szId = -1;
+            }
+            
+            if($szId >= 0 && $szId <= count($adatok))
+            {
+                //d($adatok);
+                echo '<div>
+                        Honnan: <strong>'.$adatok[$szId][1].'</strong>
+                        Hova: <strong>'.$adatok[$szId][2].'</strong>
+                    </div>';
+            }
+            else
+            {
+                echo "A számozás 1-essel kezdődik és 33-mal végződik. Az álltala megadott ".($szId+1)." ID nem létezik. / Üres adatot adott meg!";
+            }
+        }
+    }
+
 ?>
