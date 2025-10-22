@@ -34,21 +34,12 @@
     function feladat3()
     {
         echo <<<'HTML'
-        <!DOCTYPE html>
-        <html lang="en">
-        <head>
-            <meta charset="UTF-8">
-            <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <title>Szállítós feladat</title>
-        </head>
-        <body>
             <form method="get">
                 <label for="szallitasId">Adja meg a kívánt időpontot!</label>
                 <input type="number" id="idoId" name="idoId">
                 <input type="submit" value="Küldés">
             </form>
-        </body>
-        </html>
+
         HTML;
     }
     
@@ -145,6 +136,33 @@
     }
     echo "<br> A kezdőpont előtt elhaladó rekeszek össztömege: ".$osszSuly;
     echo feladat3();
-    echo "Valami random indexek: ";
-    echo implode(", ",$indexek2);
+    if(isset($_GET["idoId"]))
+    {
+        if(sizeof($indexek2) == 0)
+        {
+            echo "Üres ez a cutsz";
+        }
+        else
+        {
+            echo "Valami random indexek: ";
+            echo implode(", ",$indexek2);
+       }
+    }
+    $faljAdatok = [];
+    for($i=0; $i < sizeof($adatok); $i++)
+    {
+        if(!isset($faljAdatok[$adatok[$i][1]]))
+        {
+            $faljAdatok[$adatok[$i][1]] = 0;
+        }
+         $faljAdatok[$adatok[$i][1]] += $adatok[$i][3];
+    }
+    //d($faljAdatok);
+    $tomegFajl = fopen("tomeg.txt","w");
+    foreach($faljAdatok as $index => $elem)
+    {
+        fwrite($tomegFajl,$index." ".$elem."\n");
+    }
+    fclose($tomegFajl);
+
 ?>
